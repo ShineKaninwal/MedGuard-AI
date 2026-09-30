@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+/* Warm ivory page with a very soft sage wash at the top so the cards sit on a calm surface. */
+body { @apply bg-ivory-100 text-slate-900 antialiased; background-image: radial-gradient(1100px 380px at 85% -80px, rgba(220, 233, 223, 0.75), transparent 70%); background-attachment: fixed; }
+/* Page titles use a serif display face; the rest of the interface stays in Plus Jakarta Sans. Falls back to Georgia offline. */
+h1[class] { font-family: 'Fraunces', Georgia, serif; font-weight: 600; letter-spacing: -0.01em; color: #123B32; }
+main:focus { outline: none; }
+button:focus-visible, select:focus-visible, summary:focus-visible { @apply outline-2 outline-offset-2 outline-teal-600; }
+textarea:focus-visible, input:focus-visible, a:focus-visible { @apply outline-2 outline-offset-2 outline-teal-600; }
+button:disabled { cursor: not-allowed; }
+summary { cursor: pointer; list-style: none; }
+summary::-webkit-details-marker { display: none; }
+::selection { background: #E8BD68; color: #242B29; }
+
+/* Simulated content is marked with a dashed border, a diagonal pattern AND a text label, so it never relies on colour alone. */
+.sim-surface {
+  background-image: repeating-linear-gradient(135deg, rgba(22, 135, 107, 0.08) 0 8px, transparent 8px 16px);
+}
+
+/* Visible only when a keyboard user tabs to it. */
+.skip-link { @apply absolute left-3 top-3 z-[100] -translate-y-20 rounded-xl bg-navy-900 px-4 py-2.5 text-sm font-bold text-white shadow-xl transition-transform; }
+.skip-link:focus { @apply translate-y-0; }
+
+/* Cards lift a little on hover. Only on devices that really hover, so phones do not get stuck states. */
+.card-hover { transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+@media (hover: hover) { .card-hover:hover { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(18, 59, 50, 0.06), 0 16px 32px -12px rgba(18, 59, 50, 0.22); } }
+
+/* Heartbeat: the heart pulses, and the ECG line is drawn once, then repeats slowly. */
+.beat { transform-origin: center; transform-box: fill-box; animation: heartbeat 1.6s ease-in-out infinite; }
+.ecg-line { stroke-dasharray: 420; stroke-dashoffset: 420; animation: ecg 2.4s ease-out 0.3s forwards; }
+.ecg-loop { stroke-dasharray: 420; stroke-dashoffset: 420; animation: ecg 3.2s linear infinite; }
+@keyframes ecg { to { stroke-dashoffset: 0; } }
+/* Staggered entrance for dashboard boxes. */
+.stagger > * { animation: rise 0.45s ease-out both; }
+.stagger > *:nth-child(2) { animation-delay: 0.05s; } .stagger > *:nth-child(3) { animation-delay: 0.1s; } .stagger > *:nth-child(4) { animation-delay: 0.15s; }
+.stagger > *:nth-child(5) { animation-delay: 0.2s; } .stagger > *:nth-child(6) { animation-delay: 0.25s; }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* Gentle page entrance. Removed for anyone who asks their device for less motion. */
+@keyframes page-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.page-in { animation: page-in 0.3s ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .ecg-line, .ecg-loop { stroke-dashoffset: 0; }
+  .card-hover:hover { transform: none; }
+}
+
+@media print {
+  body * { visibility: hidden; }
+  #visit-notes, #visit-notes * { visibility: visible; }
+  #visit-notes { position: absolute; inset: 0 auto auto 0; width: 100%; padding: 24px; }
+}

@@ -1,0 +1,3 @@
+{ "name": "medguard-e2e", "private": true, "type": "module", "version": "1.0.0",
+  "scripts": { "routes": "node routes.mjs", "workflows": "node workflows.mjs", "extra": "node extra.mjs", "all": "node routes.mjs && node workflows.mjs && node extra.mjs" },
+  "dependencies": { "axe-core": "^4.13.0", "puppeteer-core": "^25.12.0" } }
