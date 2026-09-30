@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MedGuard AI
 
 A prototype for managing a family's medicines. **All sample people, medicines, phone numbers and prices are fictional.** Data is stored in this browser only. Not clinically or legally reviewed; not a medical device.
@@ -80,3 +81,6 @@ Visual redesign only. No logic, data handling, safety rule or route was changed.
 - **Backend later**: add a provider `{ send({ notification, message }) => Promise<{ status: 'sent'|'failed', error? }> }` to `PROVIDERS` in `services/notifications.js` and set `NOTIFY_PROVIDER` in `config/sos.js`. A real service also needs consent for messaging, phone verification, delivery receipts, retries and a server-side audit log.
 - **Privacy**: location and medical details go into a message only when ticked for that alert. "Remember these choices" is off by default. Everything, including coordinates, is stored in this browser's LocalStorage. Real medical data should not be stored or sent like this.
 - **Limits**: the caregiver dashboard shows alerts only because patient and caregiver share one browser. Emergency numbers are for India; confirm before real use. Not clinically or legally reviewed.
+=======
+# MedGuard-AI
+>>>>>>> 5378185919762de27699e4ca87e8e944f454ea43
